@@ -3,7 +3,7 @@
 namespace Telepath\Laravel\TelegramUser\Tests;
 
 use Telepath\Laravel\TelegramUser\LaravelUserServiceProvider;
-use Telepath\Laravel\TelegramUser\User;
+use Telepath\Laravel\TelegramUser\Models\User;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {

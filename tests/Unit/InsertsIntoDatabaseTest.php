@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Telepath\Laravel\TelegramUser\User;
+use Telepath\Laravel\TelegramUser\Models\User;
 
 uses(RefreshDatabase::class);
 

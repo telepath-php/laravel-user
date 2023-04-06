@@ -1,6 +1,6 @@
 <?php
 
-namespace Telepath\Laravel\TelegramUser;
+namespace Telepath\Laravel\TelegramUser\Models;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
