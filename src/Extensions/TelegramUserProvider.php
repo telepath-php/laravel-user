@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use function Telepath\Laravel\TelegramUser\telegram_verify_data;
 
 class TelegramUserProvider implements UserProvider
 {
@@ -76,21 +77,11 @@ class TelegramUserProvider implements UserProvider
 
     public function validateCredentials(Authenticatable $user, array $credentials)
     {
-        $hash = $credentials['hash'] ?? null;
-
-        if (! $hash) {
+        if (! isset($credentials['hash'])) {
             return false;
         }
 
-        $dataCheckString = collect($credentials)
-            ->only(['id', 'first_name', 'last_name', 'username', 'photo_url', 'auth_date'])
-            ->sortKeys()
-            ->map(fn($value, $key) => "{$key}={$value}")
-            ->join("\n");
-
-        $secretKey = hash('sha256', $this->getBotToken(), true);
-
-        if (hash_hmac('sha256', $dataCheckString, $secretKey) !== $hash) {
+        if (! telegram_verify_data($credentials, $this->getBotToken())) {
             return false;
         }
 
